@@ -1,0 +1,26 @@
+{
+  "name": "sume",
+  "version": "1.0.0",
+  "description": "A barebones DOM templating engine",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "node test/test.js"
+  },
+  "author": "jackdalton",
+  "license": "MIT",
+  "keywords": [
+    "template",
+    "dom"
+  ],
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jackdalton2/sume.js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jackdalton2/sume.js/issues"
+  },
+  "homepage": "https://github.com/jackdalton2/sume.js#readme"
+}
