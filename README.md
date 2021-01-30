@@ -1,4 +1,4 @@
-# Sume.js
+# Sume.js [![Build Status](https://travis-ci.com/jackdalton2/Sume.js.svg?branch=main)](https://travis-ci.com/jackdalton2/Sume.js)
 
 Low effort DOM templating for the frontend
 
