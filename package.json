@@ -4,7 +4,7 @@
   "description": "A barebones DOM templating engine",
   "main": "src/index.js",
   "scripts": {
-    "test": "node test/test.js"
+    "test": "mocha"
   },
   "author": "jackdalton",
   "license": "MIT",
@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/jackdalton2/sume.js/issues"
   },
-  "homepage": "https://github.com/jackdalton2/sume.js#readme"
+  "homepage": "https://github.com/jackdalton2/sume.js#readme",
+  "devDependencies": {
+    "mocha": "^8.2.1"
+  }
 }
