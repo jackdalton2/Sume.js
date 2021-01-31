@@ -2,17 +2,27 @@ module.exports = {
     parse: function(template) {
         const delimiterStart = "{{";
         const delimiterEnd = "}}";
+        const escapeChar = "\\";
+
         let blocks = [];
         let blockBegin, blockEnd = null;
         let length = template.length - 1;
+        let escaped = false;
 
         for (let i = 0, j = 1; i < length; i++, j++) {
             let scan = template[i] + template[j];
-            if (scan == delimiterStart) {
+            if (template[i - 1] == escapeChar) {
+                template = template.slice(0, i - 1) + template.slice(i);
+                escaped = true;
+            }
+            if (scan == delimiterStart && !escaped) {
                 blockBegin = i + 2;
             }
-            if (scan == delimiterEnd) {
+            if (scan == delimiterEnd && !escaped) {
                 blockEnd = i;
+            }
+            if (scan == delimiterEnd && escaped) {
+                escaped = false;
             }
             if (blockBegin != null && blockEnd != null) {
                 let flag = template.slice(blockBegin, blockEnd);
@@ -28,14 +38,20 @@ module.exports = {
         }
 
         length = null;
-        return blocks.length > 0 ? blocks : false;
+
+        return {
+            blocks: blocks.length > 0 ? blocks : false,
+            template: template
+        };
     },
     compile: function(template, blocks, context) {
         if (blocks == false) {
             return template;
         }
+
         let length = blocks.length;
         let stop = blocks.length - 1;
+
         for (let i = 0; i < length; i++) {
             let val = context[blocks[i].flag];
             if (i < stop) {
@@ -44,9 +60,11 @@ module.exports = {
                 blocks[next].indices[0] += lenDifference;
                 blocks[next].indices[1] += lenDifference;
             }
-            template = template.substring(0, blocks[i].indices[0]) + val +  template.substring(blocks[i].indices[1]);
+            template = template.substring(0, blocks[i].indices[0]) + val + template.substring(blocks[i].indices[1]);
         }
+
         length = null;
+        
         return template;
     }
 };

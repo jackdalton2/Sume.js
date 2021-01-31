@@ -19,6 +19,8 @@ let source = `
 
     <span>
         {{ content }}
+
+        Escaped delimiters: \\{{ hello! }}
     </span>
 `;
 
@@ -39,5 +41,7 @@ let renderedElement = template(context);
 
 <span>
     Low effort DOM templating for the frontend
+
+    Escaped delimiters: {{ hello! }}
 </span>
 ```

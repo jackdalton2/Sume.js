@@ -34,5 +34,8 @@ describe("Output", function() {
         it("should render a compiled template", function() {
             assert.equal(html, expectedOutput);
         });
+        it("should ignore escaped delimiters and remove escape character", function() {
+            assert.equal(Sume.compile("\\{{}}")(), "{{}}");
+        })
     })
 });
