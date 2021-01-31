@@ -28,7 +28,6 @@ module.exports = {
         }
 
         length = null;
-        console.log(blocks);
         return blocks.length > 0 ? blocks : false;
     },
     compile: function(template, blocks, context) {
@@ -38,8 +37,6 @@ module.exports = {
         let length = blocks.length;
         let stop = blocks.length - 1;
         for (let i = 0; i < length; i++) {
-            console.log(context);
-            console.log(blocks[i].flag);
             let val = context[blocks[i].flag];
             if (i < stop) {
                 let lenDifference = val.length - (4 + blocks[i].flag.length) - blocks[i].stripped;

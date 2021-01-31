@@ -20,7 +20,6 @@ let html = template({
     content: "Sume.js"
 });
 
-console.log(html);
 
 describe("Output", function() {
     describe("Sume.compile()", function() {
