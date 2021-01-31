@@ -3,6 +3,11 @@
 Low effort DOM templating for the frontend
 
 ---
+## CDN
+
+[jsDelivr](https://cdn.jsdelivr.net/npm/sume@latest/dist/sume.min.js)
+
+---
 
 ## Usage
 
