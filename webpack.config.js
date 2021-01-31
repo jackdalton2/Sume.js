@@ -1,10 +1,17 @@
 const path = require("path");
 
 module.exports = {
-    entry: "./src/index.js",
+    entry: {
+        "sume.min": "./src/index.js"
+    },
+    devtool: "source-map",
     mode: "production",
     output: {
-        filename: "sume.min.js",
-        path: path.resolve(__dirname, "dist")
+        path: path.resolve(__dirname, "dist"),
+        filename: "[name].js"
+    },
+    optimization: {
+        minimize: true,
+        moduleIds: "size"
     }
 };
