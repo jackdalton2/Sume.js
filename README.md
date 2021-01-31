@@ -10,10 +10,10 @@ Low effort DOM templating for the frontend
 const Sume = require("sume");
 
 let source = `
-    <a href="{{url}}">{{title}}</a>
+    <a href="{{ url }}">{{title}}</a>
 
     <span>
-        {{content}}
+        {{ content }}
     </span>
 `;
 

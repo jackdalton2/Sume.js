@@ -15,16 +15,20 @@ module.exports = {
                 blockEnd = i;
             }
             if (blockBegin != null && blockEnd != null) {
+                let flag = template.slice(blockBegin, blockEnd);
+                let spaces = flag.split(" ").length - 1;
+                flag = flag.replace(/\s+/g, "");
                 blocks.push({
                     indices: [blockBegin - 2, blockEnd + 2],
-                    flag: template.slice(blockBegin, blockEnd)
+                    flag: flag,
+                    stripped: spaces
                 });
                 blockBegin, blockEnd = null;
             }
         }
 
         length = null;
-
+        console.log(blocks);
         return blocks.length > 0 ? blocks : false;
     },
     compile: function(template, blocks, context) {
@@ -34,16 +38,18 @@ module.exports = {
         let length = blocks.length;
         let stop = blocks.length - 1;
         for (let i = 0; i < length; i++) {
+            console.log(context);
+            console.log(blocks[i].flag);
             let val = context[blocks[i].flag];
             if (i < stop) {
-                let lenDifference = (val.length) - (4 + blocks[i].flag.length);
+                let lenDifference = val.length - (4 + blocks[i].flag.length) - blocks[i].stripped;
                 let next = i + 1;
                 blocks[next].indices[0] += lenDifference;
                 blocks[next].indices[1] += lenDifference;
             }
             template = template.substring(0, blocks[i].indices[0]) + val +  template.substring(blocks[i].indices[1]);
         }
-        blocks.length = null;
+        length = null;
         return template;
     }
 };
