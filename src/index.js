@@ -1,6 +1,6 @@
 const parser = require('./parser.js');
 
-module.exports = {
+Sume = module.exports = {
     compile: function(template) {
         let blocks = parser.parse(template);
         return function(context) {
