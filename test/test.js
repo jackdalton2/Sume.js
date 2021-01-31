@@ -36,6 +36,17 @@ describe("Output", function() {
         });
         it("should ignore escaped delimiters and remove escape character", function() {
             assert.equal(Sume.compile("\\{{}}")(), "{{}}");
-        })
-    })
+        });
+    });
+    describe("Error Checks", function() {
+        it("should throw an error on missing opening tags", function() {
+            assert.throws(() => {Sume.compile("test }}")({test: "test text"})}, SyntaxError);
+        });
+        it("should throw an error on missing closing tags", function() {
+            assert.throws(() => {Sume.compile("{{ test")({test: "test text"})}, SyntaxError);
+        });
+        it("should throw an error on empty tags", function() {
+            assert.throws(() => {Sume.compile("{{ }}")({test: "test text"})}, SyntaxError);
+        });
+    });
 });
