@@ -4,7 +4,7 @@ const assert = require("assert");
 
 let templateSource = `
     <tag href="{{ url }}">
-        <tag>{{ content }}</tag>
+        <tag>{{ content.description }}</tag>
     </tag>
 `;
 let expectedOutput = `
@@ -17,7 +17,9 @@ let template = Sume.compile(templateSource);
 
 let html = template({
     url: "https://github.com/jackdalton2/Sume.js",
-    content: "Sume.js"
+    content: {
+        description: "Sume.js"
+    }
 });
 
 
