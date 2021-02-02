@@ -14,13 +14,19 @@ module.exports = function(template, blocks, context) {
             val = val[path[i]];
         }
 
+        val = val.replace(/\&/g, '&amp;')
+            .replace(/\</g, '&lt;')
+            .replace(/\>/g, '&gt;')
+            .replace(/\"/g, '&quot;')
+            .replace(/\'/g, '&#x27');
+        
         if (i < stop) {
             let lenDifference = val.length - (4 + blocks[i].flag.length) - blocks[i].stripped;
             let next = i + 1;
             blocks[next].indices[0] += lenDifference;
             blocks[next].indices[1] += lenDifference;
         }
-        
+
         template = template.substring(0, blocks[i].indices[0]) + val + template.substring(blocks[i].indices[1]);
     }
 
