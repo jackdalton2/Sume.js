@@ -8,4 +8,4 @@ Sume = module.exports = {
             return compiler(t.template, t.blocks, context);
         }
     }
-}
+};
