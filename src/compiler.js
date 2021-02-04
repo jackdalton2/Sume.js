@@ -6,6 +6,7 @@ module.exports = function(template, blocks, context) {
     let length = blocks.length;
     let stop = blocks.length - 1;
     let totalLenDifference = 0;
+    let shift = [[0, 0]];
 
     for (let i = 0; i < length; i++) {
         let path = blocks[i].flag.split(".");
@@ -28,15 +29,16 @@ module.exports = function(template, blocks, context) {
         } catch (e) {
             throw new ReferenceError("Unknown context key \"" + blocks[i].flag + "\"");
         }
-        
+
         if (i < stop) {
             totalLenDifference += val.length - 4 - blocks[i].flag.length - blocks[i].stripped;
             let next = i + 1;
-            blocks[next].indices[0] += totalLenDifference;
-            blocks[next].indices[1] += totalLenDifference;
+            shift.push([
+                totalLenDifference,
+                totalLenDifference
+            ]);
         }
-
-        template = template.substring(0, blocks[i].indices[0]) + val + template.substring(blocks[i].indices[1]);
+        template = template.substring(0, blocks[i].indices[0] + shift[i][0]) + val + template.substring(blocks[i].indices[1] + shift[i][1]);
     }
 
     length = null;

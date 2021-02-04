@@ -3,10 +3,8 @@ const compiler = require("./compiler.js")
 
 Sume = module.exports = {
     compile: function(template) {
-        let t = parser(template);
-        return function(context) {
-            return compiler(t.template, t.blocks, context);
-        }
+        const t = parser(template);
+        return (context) => compiler(t.template, t.blocks, context);
     },
-    version: "1.2.0"
+    version: "1.2.1"
 };
