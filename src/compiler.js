@@ -15,12 +15,20 @@ module.exports = function(template, blocks, context) {
             val = val[path[j]];
         }
 
-        val = val.replace(/\&/g, '&amp;')
-            .replace(/\</g, '&lt;')
-            .replace(/\>/g, '&gt;')
-            .replace(/\"/g, '&quot;')
-            .replace(/\'/g, '&#x27');
+        if (val != undefined) {
+            val = String(val);
+        }
 
+        try {
+            val = val.replace(/\&/g, '&amp;')
+                .replace(/\</g, '&lt;')
+                .replace(/\>/g, '&gt;')
+                .replace(/\"/g, '&quot;')
+                .replace(/\'/g, '&#x27');
+        } catch (e) {
+            throw new ReferenceError("Unknown context key \"" + blocks[i].flag + "\"");
+        }
+        
         if (i < stop) {
             totalLenDifference += val.length - 4 - blocks[i].flag.length - blocks[i].stripped;
             let next = i + 1;

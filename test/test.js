@@ -50,5 +50,8 @@ describe("Output", function() {
         it("should throw an error on empty tags", function() {
             assert.throws(() => {Sume.compile("{{ }}")({test: "test text"})}, SyntaxError);
         });
+        it("should throw an error on missing context variables", function() {
+            assert.throws(() => {Sume.compile("{{ a }}")({b: "test text"})}, ReferenceError);
+        });
     });
 });

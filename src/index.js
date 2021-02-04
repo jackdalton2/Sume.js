@@ -7,5 +7,6 @@ Sume = module.exports = {
         return function(context) {
             return compiler(t.template, t.blocks, context);
         }
-    }
+    },
+    version: "1.2.0"
 };
